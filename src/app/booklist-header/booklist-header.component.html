@@ -16,16 +16,26 @@
         <input type="number" placeholder="Pages..." [(ngModel)] = "newBook.numOfPages">
       </div>
     </div>
-    <div class="field">
-      <div class="ui toggle checkbox">
-        <input type="checkbox" name="fav" tabindex="0" class="hidden" [(ngModel)] = "newBook.isFavourite">
-        <label>Do not include a receipt in the package</label>
+    <div class="two fields centered">
+      <div class="field">
+        <div class="ui toggle checkbox">
+          <input type="checkbox" name="fav" tabindex="0" class="hidden" [(ngModel)] = "newBook.isFavourite">
+          <label>Is this book one of your favourites?</label>
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <div class="ui toggle checkbox">
-        <input type="checkbox" name="read" tabindex="0" class="hidden" [(ngModel)] = "newBook.hasBeenRead">
-        <label>Do not include a receipt in the package</label>
+      <div class="field">
+        <div class="two fields">
+          <div class="field">
+            <div class="ui toggle checkbox">
+              <input type="checkbox" name="read" tabindex="0" class="hidden" [(ngModel)] = "newBook.hasBeenRead">
+              <label>Is this book already read?</label>
+            </div>
+          </div>
+          <div class="field" *ngIf="newBook.hasBeenRead">
+            <label>When did you read it?</label>
+            <input type="date" date-time [(ngModel)] = "newBook.readDate">
+          </div>
+        </div>
       </div>
     </div>
   </div>
