@@ -1,3 +1,33 @@
-<p>
-  booklist-header works!
-</p>
+<div class="ui container">
+  <div class="ui form">
+    <div class="fields">
+      <div class="eight wide field">
+        <label>Title</label>
+        <input name = "bookTitle" type="text" placeholder="Book title..." [(ngModel)] = "newBook.title">
+      </div>
+      <div class="six wide field">
+        <label>Categories</label>
+        <select class="ui fluid search dropdown" multiple="" [(ngModel)] = "newBook.categories" (change)="printResults()">
+          <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
+        </select>
+      </div>
+      <div class="two wide field">
+        <label>Number of pages:</label>
+        <input type="number" placeholder="Pages..." [(ngModel)] = "newBook.numOfPages">
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui toggle checkbox">
+        <input type="checkbox" name="fav" tabindex="0" class="hidden" [(ngModel)] = "newBook.isFavourite">
+        <label>Do not include a receipt in the package</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui toggle checkbox">
+        <input type="checkbox" name="read" tabindex="0" class="hidden" [(ngModel)] = "newBook.hasBeenRead">
+        <label>Do not include a receipt in the package</label>
+      </div>
+    </div>
+  </div>
+
+</div>

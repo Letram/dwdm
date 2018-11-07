@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Book} from "./book";
+import {BooklistDataService} from "./booklist-data.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-booklist-app';
+
+  constructor(private booklistDataService: BooklistDataService){}
+
+  get books(){
+    return this.booklistDataService.getBooks();
+  }
+
+  get categories(){
+    return this.booklistDataService.getCategories();
+  }
 }

@@ -5,13 +5,15 @@ import {Book} from "./book";
   providedIn: 'root'
 })
 export class BooklistDataService {
+
   nextId: number = 3;
   books: Book[] = [
-                    new Book({id: 0, title: "Book 0", category: "Poetry", numOfPages: 100, isFavourite: false, hasBeenRead: false, readDate: null}),
-                    new Book({id: 1, title: "Book 1", category: "Drama", numOfPages: 50, isFavourite: false, hasBeenRead: false, readDate: null}),
-                    new Book({id: 2, title: "Book 2", category: "Science-Fiction", numOfPages: 200, isFavourite: false, hasBeenRead: false, readDate: null})
+                    new Book({id: 0, title: "Book 0", categories: ["Poetry"], numOfPages: 100, isFavourite: false, hasBeenRead: false, readDate: null}),
+                    new Book({id: 1, title: "Book 1", categories: ["Drama"], numOfPages: 50, isFavourite: false, hasBeenRead: false, readDate: null}),
+                    new Book({id: 2, title: "Book 2", categories: ["Science-Fiction"], numOfPages: 200, isFavourite: false, hasBeenRead: false, readDate: null})
                   ];
   categories: string[] = ["Kids", "Comic", "Drama", "Poetry", "Science-Fiction", "Thriller", "Fantasy"];
+
   constructor() { }
 
   getCategories():string[]{
@@ -21,6 +23,7 @@ export class BooklistDataService {
     return this.books;
   }
   addBookData(book: Book): BooklistDataService{
+    console.log(this.nextId + 1);
     book.id = this.nextId++;
     this.books.push(book);
     return this;

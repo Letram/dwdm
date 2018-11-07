@@ -1,7 +1,7 @@
 export class Book {
   id: number;
   title: string;
-  category: string;
+  categories: string[];
   numOfPages: number;
   isFavourite: Boolean;
   hasBeenRead: Boolean;
