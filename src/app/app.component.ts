@@ -19,4 +19,8 @@ export class AppComponent {
   get categories(){
     return this.booklistDataService.getCategories();
   }
+
+  addBook(book: Book) {
+    this.booklistDataService.addBookData(book);
+  }
 }

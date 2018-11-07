@@ -1,43 +1,58 @@
+<header class="ui container">
+  <div class="ui basic segment padded">
+    <h2 class="ui huge header">
+      <i class="book icon"></i>
+      <div class="content">
+        Your Booklist
+        <div class="sub header">Haven't read it yet?</div>
+      </div>
+    </h2>
+  </div>
+</header>
 <div class="ui container">
-  <div class="ui form">
-    <div class="fields">
-      <div class="eight wide field">
-        <label>Title</label>
-        <input name = "bookTitle" type="text" placeholder="Book title..." [(ngModel)] = "newBook.title">
-      </div>
-      <div class="six wide field">
-        <label>Categories</label>
-        <select class="ui fluid search dropdown" multiple="" [(ngModel)] = "newBook.categories" (change)="printResults()">
-          <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
-        </select>
-      </div>
-      <div class="two wide field">
-        <label>Number of pages:</label>
-        <input type="number" placeholder="Pages..." [(ngModel)] = "newBook.numOfPages">
-      </div>
-    </div>
-    <div class="two fields centered">
-      <div class="field">
-        <div class="ui toggle checkbox">
-          <input type="checkbox" name="fav" tabindex="0" class="hidden" [(ngModel)] = "newBook.isFavourite">
-          <label>Is this book one of your favourites?</label>
+  <div class="ui segment padded">
+    <div class="ui form">
+      <div class="fields">
+        <div class="eight wide required field">
+          <label>Title</label>
+          <input name = "bookTitle" type="text" placeholder="Book title..." [(ngModel)] = "newBook.title">
+        </div>
+        <div class="six wide required field">
+          <label>Categories</label>
+          <select class="ui fluid search dropdown" multiple="" [(ngModel)] = "newBook.categories" (change)="printResults()">
+            <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
+          </select>
+        </div>
+        <div class="two wide required field">
+          <label>Number of pages:</label>
+          <input type="number" placeholder="Pages..." [(ngModel)] = "newBook.numOfPages">
         </div>
       </div>
-      <div class="field">
-        <div class="two fields">
-          <div class="field">
-            <div class="ui toggle checkbox">
-              <input type="checkbox" name="read" tabindex="0" class="hidden" [(ngModel)] = "newBook.hasBeenRead">
-              <label>Is this book already read?</label>
+      <div class="two fields centered">
+        <div class="field">
+          <div class="ui slider checkbox">
+            <input type="checkbox" name="fav" tabindex="0" class="hidden" [(ngModel)] = "newBook.isFavourite">
+            <label>Is this book one of your favourites?</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="two fields">
+            <div class="field">
+              <div class="ui slider checkbox">
+                <input type="checkbox" name="read" tabindex="0" class="hidden" [(ngModel)] = "newBook.hasBeenRead">
+                <label>Is this book already read?</label>
+              </div>
+            </div>
+            <div class="field" *ngIf="newBook.hasBeenRead">
+              <label>When did you read it?</label>
+              <input type="date" date-time [(ngModel)] = "newBook.readDate">
             </div>
           </div>
-          <div class="field" *ngIf="newBook.hasBeenRead">
-            <label>When did you read it?</label>
-            <input type="date" date-time [(ngModel)] = "newBook.readDate">
-          </div>
         </div>
       </div>
+      <button class="ui button" (click)="emitBookEvent()">
+        Add book info (or data, I'm not so sure about it)!
+      </button>
     </div>
   </div>
-
 </div>

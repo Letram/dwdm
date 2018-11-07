@@ -23,7 +23,7 @@ export class BooklistDataService {
     return this.books;
   }
   addBookData(book: Book): BooklistDataService{
-    console.log(this.nextId + 1);
+    console.log(this.books);
     book.id = this.nextId++;
     this.books.push(book);
     return this;

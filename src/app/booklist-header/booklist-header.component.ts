@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {Book} from "../book";
 
 declare var $;
@@ -10,6 +10,8 @@ declare var $;
 export class BooklistHeaderComponent implements OnInit {
 
   @Input() categories;
+  @Output() onBookdataCreated: EventEmitter<Book> = new EventEmitter();
+
   newBook: Book = new Book();
 
   constructor() { }
@@ -21,5 +23,10 @@ export class BooklistHeaderComponent implements OnInit {
 
   printResults() {
     console.log(this.newBook);
+  }
+
+  emitBookEvent() {
+    this.onBookdataCreated.emit(this.newBook);
+    this.newBook = new Book();
   }
 }

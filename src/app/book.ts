@@ -3,9 +3,9 @@ export class Book {
   title: string;
   categories: string[];
   numOfPages: number;
-  isFavourite: Boolean;
-  hasBeenRead: Boolean;
-  readDate: Date;
+  isFavourite: Boolean = false;
+  hasBeenRead: Boolean = false;
+  readDate: Date = null;
 
   constructor(values: Object = {}){
     Object.assign(this,values);
