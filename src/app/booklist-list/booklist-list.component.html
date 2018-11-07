@@ -1,3 +1,9 @@
-<p>
-  booklist-list works!
-</p>
+<div class="ui basic segment padded">
+  <h3 class="ui header">
+      Books
+  </h3>
+  <div class="ui grid">
+    <div class="row" *ngFor="let book of books">{{book.title}}</div>
+  </div>
+</div>
+

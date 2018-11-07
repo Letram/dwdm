@@ -1,4 +1,6 @@
-<app-booklist-header [categories] = "categories" (onBookdataCreated)="addBook($event)"></app-booklist-header>
-<app-booklist-list></app-booklist-list>
-<app-booklist-list-item></app-booklist-list-item>
-<app-booklist-footer></app-booklist-footer>
+<div class="ui container">
+  <app-booklist-header [categories] = "categories" (onBookdataCreated)="addBook($event)"></app-booklist-header>
+  <app-booklist-list [books] = "books"></app-booklist-list>
+  <app-booklist-footer></app-booklist-footer>
+</div>
+
