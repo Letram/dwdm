@@ -3,8 +3,15 @@
       <div class="ui transparent input">
         <input type="text" [ngModel]="book.title" [readonly]="readonly">
       </div>
-      <button class="ui right floated toggle button" (click)="toggleReadonly()" [class.blue] = "!readonly">
+      <button class="ui right floated icon compact button" (click)="toggleReadonly()" [class.blue] = "!readonly">
         <i class="edit icon"></i>
       </button>
+    </div>
+    <div class="ui divider"></div>
+    Categories:
+    <div class="ui horizontal list">
+      <div class="item" *ngFor="let category of book.categories">
+        {{category}}
+      </div>
     </div>
   </div>
