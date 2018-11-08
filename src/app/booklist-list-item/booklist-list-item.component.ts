@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Book} from "../book";
 
 @Component({
   selector: 'app-booklist-list-item',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BooklistListItemComponent implements OnInit {
 
-  constructor() { }
+  @Input() book: Book;
+  readonly : Boolean;
+  constructor() {
+    this.readonly = true;
+  }
 
   ngOnInit() {
   }
 
+  toggleReadonly() {
+    this.readonly = !this.readonly;
+  }
 }

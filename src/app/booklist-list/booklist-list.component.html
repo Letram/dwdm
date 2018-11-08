@@ -1,9 +1,26 @@
 <div class="ui basic segment padded">
-  <h3 class="ui header">
-      Books
-  </h3>
+
   <div class="ui grid">
-    <div class="row" *ngFor="let book of books">{{book.title}}</div>
+    <div class="two column row">
+      <div class="left floated column">
+        <h3 class="ui header">
+          Books
+        </h3>
+      </div>
+      <div class="right floated right aligned column">
+        <div class="inline field">
+          <label>
+            Filter
+          </label>
+          <select class="ui dropdown">
+            <option *ngFor="let filterValue of filter" [ngValue] = "filterValue">{{filterValue}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="ui container fluid" *ngFor="let book of books">
+      <app-booklist-list-item [book] = "book"></app-booklist-list-item>
+    </div>
   </div>
 </div>
 

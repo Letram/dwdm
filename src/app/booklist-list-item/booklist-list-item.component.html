@@ -1,3 +1,10 @@
-<p>
-  booklist-list-item works!
-</p>
+  <div class="ui padded segment">
+    <div class="ui header">
+      <div class="ui transparent input">
+        <input type="text" [ngModel]="book.title" [readonly]="readonly">
+      </div>
+      <button class="ui right floated toggle button" (click)="toggleReadonly()" [class.blue] = "!readonly">
+        <i class="edit icon"></i>
+      </button>
+    </div>
+  </div>
