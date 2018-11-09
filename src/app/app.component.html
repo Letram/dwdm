@@ -1,5 +1,5 @@
 <div class="ui container">
-  <app-booklist-header [categories] = "categories" (onBookdataCreated)="addBook($event)"></app-booklist-header>
+  <app-booklist-header [title] = "title"[categories] = "categories" (onBookdataCreated)="addBook($event)"></app-booklist-header>
   <app-booklist-list [books] = "books"></app-booklist-list>
   <app-booklist-footer></app-booklist-footer>
 </div>

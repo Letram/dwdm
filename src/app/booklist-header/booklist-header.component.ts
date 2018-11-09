@@ -10,6 +10,7 @@ declare var $;
 export class BooklistHeaderComponent implements OnInit {
 
   @Input() categories;
+  @Input() title: string;
   @Output() onBookdataCreated: EventEmitter<Book> = new EventEmitter();
 
   newBook: Book = new Book();

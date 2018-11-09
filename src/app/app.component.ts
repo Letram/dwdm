@@ -8,7 +8,7 @@ import {BooklistDataService} from "./booklist-data.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-booklist-app';
+  title = 'Libr.ia';
 
   constructor(private booklistDataService: BooklistDataService){}
 
