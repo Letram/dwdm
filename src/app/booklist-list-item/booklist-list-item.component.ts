@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
 import {Book} from "../book";
+
+declare var $;
 
 @Component({
   selector: 'app-booklist-list-item',
@@ -9,16 +11,30 @@ import {Book} from "../book";
 export class BooklistListItemComponent implements OnInit {
 
   @Input() book: Book;
+
+  @Output() onBookUpdated: EventEmitter<Book> = new EventEmitter();
+  @Output() onBookDeleted: EventEmitter<number> = new EventEmitter();
+  private readyToSend: Boolean;
   readonly : Boolean;
+
   constructor() {
     this.readonly = true;
+    this.readyToSend = false;
   }
 
   ngOnInit() {
   }
-//TODO crear una nueva instancia de un libro (newBook) que se volcará al servicio cuando querramos cambiar cosas del mismo.
-//TODO implementar el mismo select que hice para el header con las opciones de las categorías ya pickeadas (mirar lo del ngModel para hacerlo, creo que puedo tirar por ahí)
+
   toggleReadonly() {
     this.readonly = !this.readonly;
+    this.readyToSend = !this.readyToSend;
+    if(!this.readyToSend){
+      console.log(this.book);
+      this.onBookUpdated.emit(this.book);
+    }
+  }
+
+  removeBook() {
+    this.onBookDeleted.emit(this.book.id);
   }
 }

@@ -1,11 +1,23 @@
-  <div class="ui padded segment">
+  <div class="ui padded segment cm-top">
     <div class="ui header">
-      <div class="ui transparent input">
-        <input type="text" [ngModel]="book.title" [readonly]="readonly">
+      <div class="ui right floated icon buttons">
+        <button class="ui compact button" (click)="toggleReadonly()" [class.blue] = "!readonly">
+          <i class="edit icon"></i>
+        </button>
+        <button class="ui button red" (click)="removeBook()">
+          <i class="trash icon"></i>
+        </button>
       </div>
-      <button class="ui right floated icon compact button" (click)="toggleReadonly()" [class.blue] = "!readonly">
-        <i class="edit icon"></i>
-      </button>
+      <div class="inline fields">
+        <div class="field">
+          <div class="ui transparent input">
+            <input type="text" [(ngModel)]="book.title" [readonly]="readonly">
+          </div>
+        </div>
+        <div class="field">
+          Number of pages: {{book.numOfPages}}
+        </div>
+      </div>
     </div>
     <div class="ui divider"></div>
     Categories:
@@ -14,4 +26,24 @@
         {{category}}
       </div>
     </div>
+    <div class="field">
+      <div class="ui icon buttons">
+        <button class="ui button" [class.red] = "book.isFavourite" [disabled]="readonly" (click)="book.isFavourite = !book.isFavourite">
+          <i class="star icon"></i>
+        </button>
+        <button class="ui button" [class.teal] = "book.hasBeenRead" [disabled]="readonly" (click)="book.hasBeenRead = !book.hasBeenRead">
+          <i class="book icon"></i>
+        </button>
+      </div>
+    </div>
+    <div class="field" *ngIf="book.hasBeenRead">
+      <div class="field" *ngIf="book.readDate == null; else hasDate">
+        <label>When did you read it?</label>
+        <input type="date" date-time [(ngModel)] = "book.readDate" [disabled]="readonly">
+      </div>
+    </div>
   </div>
+
+  <ng-template #hasDate>
+    Read date: {{book.readDate}}
+  </ng-template>

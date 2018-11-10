@@ -23,4 +23,12 @@ export class AppComponent {
   addBook(book: Book) {
     this.booklistDataService.addBookData(book);
   }
+
+  updateBook(book: Book) {
+    this.booklistDataService.updateBookById(book.id, book);
+  }
+
+  deleteBook(id: number) {
+    this.booklistDataService.deleteBookById(id);
+  }
 }

@@ -18,8 +18,8 @@
         </div>
       </div>
     </div>
-    <div class="ui container fluid" *ngFor="let book of books">
-      <app-booklist-list-item [book] = "book"></app-booklist-list-item>
+    <div class="ui container fluid">
+        <app-booklist-list-item *ngFor="let book of books" (onBookUpdated)="onBookUpdatedToApp($event)" (onBookDeleted)="onBookDeletedToApp($event)" [book] = "book"></app-booklist-list-item>
     </div>
   </div>
 </div>

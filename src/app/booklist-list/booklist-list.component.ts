@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
 import {Book} from "../book";
 
 declare var $;
@@ -10,6 +10,8 @@ declare var $;
 export class BooklistListComponent implements OnInit {
 
   @Input() books: Book[];
+  @Output() onBookUpdated: EventEmitter<Book> = new EventEmitter();
+  @Output() onBookDeleted: EventEmitter<number> = new EventEmitter();
 
   //TODO: use filter so it can filter our books using isFavourite, hasBeenRead or nothing.
   filter: string[] = ["All", "Favourite", "Read"];
@@ -20,5 +22,11 @@ export class BooklistListComponent implements OnInit {
   }
 
 
+  onBookUpdatedToApp(book:Book) {
+    this.onBookUpdated.emit(book);
+  }
 
+  onBookDeletedToApp(id: number) {
+    this.onBookDeleted.emit(id);
+  }
 }

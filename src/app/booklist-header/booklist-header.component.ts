@@ -18,7 +18,7 @@ export class BooklistHeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    $('.ui.dropdown').dropdown();
+    $('.headerDropdown').dropdown();
     $('.ui.checkbox').checkbox();
   }
 
