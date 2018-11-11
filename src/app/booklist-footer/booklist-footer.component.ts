@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Category} from "../category";
 
 @Component({
   selector: 'app-booklist-footer',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./booklist-footer.component.css']
 })
 export class BooklistFooterComponent implements OnInit {
+
+  @Input() formattedCategories: Category[];
 
   constructor() { }
 
