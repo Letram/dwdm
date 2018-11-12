@@ -23,7 +23,7 @@ export class BooklistDataService {
     new Category({id: 5, name: "Thriller", bookNum: 0}),
     new Category({id: 6, name: "Fantasy", bookNum: 0})
   ];
-
+  totalCategoryCount: number = 3;
   constructor() { }
 
   getCategories():string[]{
@@ -34,6 +34,9 @@ export class BooklistDataService {
   }
   getFormattedCategories():Category[]{
     return this.formattedCategories;
+  }
+  getTotalCategoryCount():number {
+    return this.totalCategoryCount;
   }
   addBookData(book: Book): BooklistDataService{
     console.log(this.books);
@@ -48,8 +51,14 @@ export class BooklistDataService {
     for (let i = 0; i < categories.length; i++) {
       this.formattedCategories.map((category)=>{
         if(categories[i] == category.name){
-          if(operation == "increment")category.bookNumber++;
-          else category.bookNumber--;
+          if(operation == "increment"){
+            category.bookNum++;
+            this.totalCategoryCount++;
+          }
+          else{
+            category.bookNum--;
+            this.totalCategoryCount--;
+          }
         }
       });
     }
@@ -77,4 +86,5 @@ export class BooklistDataService {
     let book = this.books.filter(book => book.id === id).pop();
     return book;
   }
+
 }

@@ -31,6 +31,7 @@
         <button class="ui button" [class.red] = "book.isFavourite" [disabled]="readonly" (click)="book.isFavourite = !book.isFavourite">
           <i class="star icon"></i>
         </button>
+        <div class="or"></div>
         <button class="ui button" [class.teal] = "book.hasBeenRead" [disabled]="readonly" (click)="book.hasBeenRead = !book.hasBeenRead">
           <i class="book icon"></i>
         </button>

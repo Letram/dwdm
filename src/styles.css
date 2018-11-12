@@ -2,3 +2,7 @@
 .cm-top{
   margin-top: 1em !important;
 }
+
+.formattedCategory{
+  display: none;
+}

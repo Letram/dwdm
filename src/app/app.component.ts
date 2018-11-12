@@ -20,6 +20,13 @@ export class AppComponent {
     return this.booklistDataService.getCategories();
   }
 
+  get formattedCategories(){
+    return this.booklistDataService.getFormattedCategories();
+  }
+
+  get totalCategoryCount(){
+    return this.booklistDataService.getTotalCategoryCount();
+  }
   addBook(book: Book) {
     this.booklistDataService.addBookData(book);
   }
