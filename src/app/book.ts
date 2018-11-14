@@ -1,5 +1,5 @@
 export class Book {
-  id: number;
+  id: string;
   title: string;
   categories: string[];
   numOfPages: number;
