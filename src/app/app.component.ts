@@ -4,6 +4,7 @@ import {BooklistDataService} from "./booklist-data.service";
 import {BooklistDataBackendService} from "./booklist-data-backend.service";
 import {Category} from "./category";
 import {BehaviorSubject} from "rxjs";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-root',
@@ -18,20 +19,21 @@ export class AppComponent {
   books: Book[] = [];
 
   categories: Category[] = [];
+  filteredCategories: Category[] = this.categories;
   count: number = 0;
 
   ngOnInit(){
     this.booklistDataService.getBooks().subscribe(
       (books) => {
-        console.log("yay");
         this.books = books;
+        this.count = this.books.length;
       }
     );
 
     this.booklistDataService.getCategories().subscribe(
       (categories) =>{
         this.categories = categories;
-        this.count = this.categories.length;
+        this.filteredCategories = this.categories.filter((c) => c.bookNum > 0);
       }
     );
   }
@@ -41,6 +43,13 @@ export class AppComponent {
     this.booklistDataService.addBook(book).subscribe(
       (book) => this.books = this.books.concat(book)
     );
+    this.categories.forEach((cat) => {
+      if(book.categories.includes(cat.name)){
+        cat.bookNum++;
+        console.log(cat);
+        this.booklistDataService.updateCategory(cat);
+      }
+    });
   }
 
   updateBook(book: Book) {

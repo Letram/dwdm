@@ -2,9 +2,9 @@
   <button class="circular ui icon button right floated" (click)="toggleView()"><i class="icon eye" [class.slash] = "hide"></i></button>
   <h3 class="ui header">Your stats</h3>
 </div>
-<div class="ui segment formattedCategory" *ngFor="let formattedCategory of formattedCategories.sort(compareByNum)">
+<div class="ui segment formattedCategory" *ngFor="let filteredCategory of formattedCategories.sort(compareByNum)">
   <h5 class="ui header">
-    {{formattedCategory.name}}
+    {{filteredCategory.name}}
   </h5>
-  <p>{{formattedCategory.bookNum}} out of {{totalCategoryCount}}</p>
+  <p>{{filteredCategory.bookNum}} out of {{totalBookCount}}</p>
 </div>

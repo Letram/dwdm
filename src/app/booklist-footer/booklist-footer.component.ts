@@ -10,7 +10,7 @@ declare var $;
 export class BooklistFooterComponent implements OnInit {
 
   @Input() formattedCategories: Category[];
-  @Input() totalCategoryCount: number;
+  @Input() totalBookCount: number;
 
   hide: Boolean;
   constructor() {
@@ -18,6 +18,9 @@ export class BooklistFooterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.formattedCategories = this.formattedCategories.filter((category) => {
+      return category.bookNum > 0;
+    });
   }
 
   compareByNum(a, b){
