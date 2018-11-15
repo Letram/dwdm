@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import {Book} from "./book";
 import {BooklistDataService} from "./booklist-data.service";
+import {BooklistDataBackendService} from "./booklist-data-backend.service";
+import {Category} from "./category";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -10,32 +13,47 @@ import {BooklistDataService} from "./booklist-data.service";
 export class AppComponent {
   title = 'Libr.ia';
 
-  constructor(private booklistDataService: BooklistDataService){}
+  constructor(private booklistDataService: BooklistDataBackendService){}
 
-  get books(){
-    return this.booklistDataService.getBooks();
+  books: Book[] = [];
+
+  categories: Category[] = [];
+  count: number = 0;
+
+  ngOnInit(){
+    this.booklistDataService.getBooks().subscribe(
+      (books) => {
+        console.log("yay");
+        this.books = books;
+      }
+    );
+
+    this.booklistDataService.getCategories().subscribe(
+      (categories) =>{
+        this.categories = categories;
+        this.count = this.categories.length;
+      }
+    );
   }
 
-  get categories(){
-    return this.booklistDataService.getCategories();
-  }
-
-  get formattedCategories(){
-    return this.booklistDataService.getFormattedCategories();
-  }
-
-  get totalCategoryCount(){
-    return this.booklistDataService.getTotalCategoryCount();
-  }
   addBook(book: Book) {
-    this.booklistDataService.addBookData(book);
+    //this.booklistDataService.addBookData(book);
+    this.booklistDataService.addBook(book).subscribe(
+      (book) => this.books = this.books.concat(book)
+    );
   }
 
   updateBook(book: Book) {
-    this.booklistDataService.updateBookById(book.id, book);
+    //this.booklistDataService.updateBookById(book.id, book);
+    this.booklistDataService.updateBook(book).subscribe(
+      (updatedBook) => book = updatedBook
+    );
   }
 
-  deleteBook(id: number) {
-    this.booklistDataService.deleteBookById(id);
+  deleteBook(id: string) {
+    //this.booklistDataService.deleteBookById(id);
+    this.booklistDataService.removeBookByID(id).subscribe(
+      () => this.books = this.books.filter((book) => book.id !== id)
+    );
   }
 }

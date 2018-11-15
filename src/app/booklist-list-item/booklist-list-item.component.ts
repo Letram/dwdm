@@ -13,7 +13,8 @@ export class BooklistListItemComponent implements OnInit {
   @Input() book: Book;
 
   @Output() onBookUpdated: EventEmitter<Book> = new EventEmitter();
-  @Output() onBookDeleted: EventEmitter<number> = new EventEmitter();
+  @Output() onBookDeleted: EventEmitter<string> = new EventEmitter();
+
   private readyToSend: Boolean;
   readonly : Boolean;
 

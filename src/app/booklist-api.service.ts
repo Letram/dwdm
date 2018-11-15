@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http} from "@angular/http";
 import {environment} from "../environments/environment";
 import {Book} from "./book";
-import {Observable} from "rxjs";
+import {Observable, throwError} from "rxjs";
 import {catchError, map} from "rxjs/operators";
 import {Category} from "./category";
 
@@ -31,7 +31,7 @@ export class BooklistApiService {
         catchError(this.handleError)
       );
   }
-  getBookByID(id: number): Observable<Book>{
+  getBookByID(id: string): Observable<Book>{
     return this.http.get(API_URL + "/books/" + id)
       .pipe(
         map((response) => new Book(response.json())),
@@ -44,8 +44,8 @@ export class BooklistApiService {
         catchError(this.handleError)
       );
   }
-  deleteBookByID(id: number): Observable<null>{
-    return this.http.delete(API_URL, "/books/" + id)
+  deleteBookByID(id: string): Observable<null>{
+    return this.http.delete(API_URL + "/books/" + id)
       .pipe(
         map((response) => null),
         catchError(this.handleError)
@@ -59,6 +59,13 @@ export class BooklistApiService {
           const categories = response.json();
           return categories.map((category) => new Category(category));
         }),
+        catchError(this.handleError)
+      );
+  }
+  updateCategory(category: Category): Observable<Category>{
+    return this.http.put(API_URL + "/categories/" + category.id, category)
+      .pipe(
+        map((response) => new Category(response.json())),
         catchError(this.handleError)
       );
   }

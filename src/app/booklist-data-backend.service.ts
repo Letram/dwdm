@@ -12,13 +12,30 @@ const API_URL = environment.api_url;
 })
 export class BooklistDataBackendService {
 
-  constructor(api : BooklistApiService) { }
+  constructor(private api : BooklistApiService) { }
 
-  getCategories(){}
-  getBooks(){}
+  //BOOK MANAGEMENT
+  getBooks(){
+    return this.api.getAllBooks();
+  }
+  addBook(book: Book){
+    return this.api.createBook(book);
+  }
+  getBookByID(id: string){
+    return this.api.getBookByID(id);
+  }
+  removeBookByID(id: string){
+    return this.api.deleteBookByID(id);
+  }
+  updateBook(book: Book){
+    return this.api.updateBook(book);
+  }
 
-  addBook(){}
-  removeBookByID(){}
-  updateBookByID(){}
-  getBookByID(){}
+  //CATEGORY MANAGEMENT
+  getCategories(): Observable<Category[]>{
+    return this.api.getAllCategories();
+  }
+  updateCategory(category: Category): Observable<Category>{
+    return this.api.updateCategory(category);
+  }
 }

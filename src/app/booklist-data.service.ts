@@ -40,7 +40,7 @@ export class BooklistDataService {
   }
   addBookData(book: Book): BooklistDataService{
     console.log(this.books);
-    book.id = this.nextId++;
+    //book.id = this.nextId++;
     this.books.push(book);
     this.updateFormattedCategoryCount(book.categories, "increment");
     return this;
@@ -67,7 +67,7 @@ export class BooklistDataService {
   // Simulate DELETE /books/:id
   deleteBookById(id: number): BooklistDataService{
     //me quedo con los libros que tengan una ID diferente a la que borro.
-    this.books = this.books.filter(todo => todo.id !== id);
+    //this.books = this.books.filter(todo => todo.id !== id);
     return this;
   }
 
@@ -83,8 +83,8 @@ export class BooklistDataService {
 
   //Simulate /books/:id
   getBookById(id: number): Book{
-    let book = this.books.filter(book => book.id === id).pop();
-    return book;
+    //let book = this.books.filter(book => book.id === id).pop();
+    return;
   }
 
 }
