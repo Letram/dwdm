@@ -1,7 +1,7 @@
 <div class="ui container">
   <app-booklist-header [title] = "title" [categories] = "categories" (onBookdataCreated)="addBook($event)"></app-booklist-header>
   <app-booklist-list (onBookUpdated)="updateBook($event)" (onBookDeleted)="deleteBook($event)" [books] = "books"></app-booklist-list>
-  <app-booklist-footer [formattedCategories] = "filteredCategories" [totalBookCount] = "count"></app-booklist-footer>
+  <app-booklist-footer [formattedCategories] = "filteredCategories" [totalBookCount] = "books.length"></app-booklist-footer>
 </div>
 
 

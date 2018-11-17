@@ -69,6 +69,13 @@ export class BooklistApiService {
         catchError(this.handleError)
       );
   }
+  getCategoryByID(id: string): Observable<Category> {
+    return this.http.get(API_URL + "/categories/" + id)
+      .pipe(
+        map((response) => new Category(response.json())),
+        catchError(this.handleError)
+      );
+  }
 
   private handleError (error: Response | any) {
     console.error('ApiService::handleError', error);

@@ -1,5 +1,5 @@
-<div class="cm-top">
-  <button class="circular ui icon button right floated" (click)="toggleView()"><i class="icon eye" [class.slash] = "hide"></i></button>
+<div class="cm-top mb-2">
+  <button class="circular ui icon button left floated mr-1 " (click)="toggleView()"><i class="icon eye" [class.slash] = "hide"></i></button>
   <h3 class="ui header">Your stats</h3>
 </div>
 <div class="ui segment formattedCategory" *ngFor="let filteredCategory of formattedCategories.sort(compareByNum)">

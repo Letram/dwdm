@@ -3,8 +3,6 @@ import {Book} from "./book";
 import {BooklistDataService} from "./booklist-data.service";
 import {BooklistDataBackendService} from "./booklist-data-backend.service";
 import {Category} from "./category";
-import {BehaviorSubject} from "rxjs";
-import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-root',
@@ -43,12 +41,13 @@ export class AppComponent {
     this.booklistDataService.addBook(book).subscribe(
       (book) => this.books = this.books.concat(book)
     );
-    this.categories.forEach((cat) => {
-      if(book.categories.includes(cat.name)){
-        cat.bookNum++;
-        console.log(cat);
-        this.booklistDataService.updateCategory(cat);
-      }
+    book.categories.forEach((stringCategory) => {
+      let parsedCategory: Category[] = this.categories.filter((filteredCategory) => stringCategory === filteredCategory.name);
+      let index: number = this.filteredCategories.indexOf(parsedCategory[0]);
+      parsedCategory[0].bookNum += 1;
+      this.booklistDataService.updateCategory(parsedCategory[0]).subscribe((updatedCategory) => {
+        this.filteredCategories[index] = updatedCategory;
+      });
     });
   }
 
@@ -59,10 +58,20 @@ export class AppComponent {
     );
   }
 
-  deleteBook(id: string) {
+  deleteBook(book: Book) {
     //this.booklistDataService.deleteBookById(id);
-    this.booklistDataService.removeBookByID(id).subscribe(
-      () => this.books = this.books.filter((book) => book.id !== id)
+    this.booklistDataService.removeBookByID(book.id).subscribe(
+      () => this.books = this.books.filter((filteredBook) => filteredBook.id !== book.id)
     );
+    book.categories.forEach((stringCategory) => {
+      let parsedCategory: Category[] = this.filteredCategories.filter((filteredCategory) => stringCategory === filteredCategory.name);
+      let index: number = this.filteredCategories.indexOf(parsedCategory[0]);
+      parsedCategory[0].bookNum -= 1;
+      console.log(parsedCategory);
+      this.booklistDataService.updateCategory(parsedCategory[0]).subscribe((updatedCategory) => {
+        console.log({categories: this.categories, index, updated: updatedCategory});
+        this.filteredCategories[index] = updatedCategory;
+      });
+    });
   }
 }

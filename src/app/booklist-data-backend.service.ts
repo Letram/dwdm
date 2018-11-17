@@ -38,4 +38,7 @@ export class BooklistDataBackendService {
   updateCategory(category: Category): Observable<Category>{
     return this.api.updateCategory(category);
   }
+  getCategoryByID(id: string): Observable<Category>{
+    return this.api.getCategoryByID(id);
+  }
 }

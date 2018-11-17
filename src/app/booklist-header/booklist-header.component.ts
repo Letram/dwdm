@@ -29,5 +29,6 @@ export class BooklistHeaderComponent implements OnInit {
   emitBookEvent() {
     this.onBookdataCreated.emit(this.newBook);
     this.newBook = new Book();
+    $('.headerDropdown').dropdown("restore defaults");
   }
 }

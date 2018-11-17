@@ -14,7 +14,7 @@ export class BooklistFooterComponent implements OnInit {
 
   hide: Boolean;
   constructor() {
-    this.hide = true;
+    this.hide = false;
   }
 
   ngOnInit() {
