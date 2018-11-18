@@ -43,11 +43,16 @@ export class AppComponent {
     );
     book.categories.forEach((stringCategory) => {
       let parsedCategory: Category[] = this.categories.filter((filteredCategory) => stringCategory === filteredCategory.name);
-      let index: number = this.filteredCategories.indexOf(parsedCategory[0]);
-      parsedCategory[0].bookNum += 1;
-      this.booklistDataService.updateCategory(parsedCategory[0]).subscribe((updatedCategory) => {
-        this.filteredCategories[index] = updatedCategory;
-      });
+      let index: number = this.categories.indexOf(parsedCategory[0]);
+      if(index > -1){
+        parsedCategory[0].bookNum += 1;
+        this.booklistDataService.updateCategory(parsedCategory[0]).subscribe((updatedCategory) => {
+          this.categories[index] = updatedCategory;
+          this.filteredCategories = this.categories.filter((c) => c.bookNum > 0);
+        });
+      } else{
+
+      }
     });
   }
 
@@ -64,13 +69,14 @@ export class AppComponent {
       () => this.books = this.books.filter((filteredBook) => filteredBook.id !== book.id)
     );
     book.categories.forEach((stringCategory) => {
-      let parsedCategory: Category[] = this.filteredCategories.filter((filteredCategory) => stringCategory === filteredCategory.name);
-      let index: number = this.filteredCategories.indexOf(parsedCategory[0]);
+      let parsedCategory: Category[] = this.categories.filter((filteredCategory) => stringCategory === filteredCategory.name);
+      let index: number = this.categories.indexOf(parsedCategory[0]);
       parsedCategory[0].bookNum -= 1;
       console.log(parsedCategory);
       this.booklistDataService.updateCategory(parsedCategory[0]).subscribe((updatedCategory) => {
         console.log({categories: this.categories, index, updated: updatedCategory});
-        this.filteredCategories[index] = updatedCategory;
+        this.categories[index] = updatedCategory;
+        this.filteredCategories = this.categories.filter((c) => c.bookNum > 0);
       });
     });
   }
