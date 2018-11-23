@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Http} from "@angular/http";
-import {environment} from "../environments/environment";
-import {Book} from "./book";
+import {environment} from "../../environments/environment";
+import {Book} from "../book";
 import {Observable, throwError} from "rxjs";
 import {catchError, map} from "rxjs/operators";
-import {Category} from "./category";
+import {Category} from "../category";
 
 const API_URL = environment.api_url;
 @Injectable({

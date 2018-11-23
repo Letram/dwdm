@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import {Book} from "./book";
-import {BooklistDataService} from "./booklist-data.service";
-import {BooklistDataBackendService} from "./booklist-data-backend.service";
 import {Category} from "./category";
+import {FirebaseService} from "./services/firebase.service";
 
 @Component({
   selector: 'app-root',
@@ -12,72 +11,34 @@ import {Category} from "./category";
 export class AppComponent {
   title = 'Libr.ia';
 
-  constructor(private booklistDataService: BooklistDataBackendService){}
+  constructor(private booklistDataService: FirebaseService){}
 
   books: Book[] = [];
 
-  categories: Category[] = [];
-  filteredCategories: Category[] = this.categories;
-  count: number = 0;
+  categories: Array<any>;
 
   ngOnInit(){
-    this.booklistDataService.getBooks().subscribe(
-      (books) => {
-        this.books = books;
-        this.count = this.books.length;
-      }
-    );
-
-    this.booklistDataService.getCategories().subscribe(
-      (categories) =>{
-        this.categories = categories;
-        this.filteredCategories = this.categories.filter((c) => c.bookNum > 0);
-      }
-    );
+    //me devuelve un array con los documentos de cada libro, hay que parsearlos
+    this.booklistDataService.getBooks().subscribe(result => {
+      result.forEach((unParsedBook) => {
+        let newBook = new Book(unParsedBook.payload.doc.data());
+        newBook.id = unParsedBook.payload.doc.id;
+        this.books.push(newBook);
+        console.log({book: newBook, books: this.books});
+      });
+    });
+    this.booklistDataService.getCategories().subscribe(result => this.categories = result);
   }
 
   addBook(book: Book) {
-    //this.booklistDataService.addBookData(book);
-    this.booklistDataService.addBook(book).subscribe(
-      (book) => this.books = this.books.concat(book)
-    );
-    book.categories.forEach((stringCategory) => {
-      let parsedCategory: Category[] = this.categories.filter((filteredCategory) => stringCategory === filteredCategory.name);
-      let index: number = this.categories.indexOf(parsedCategory[0]);
-      if(index > -1){
-        parsedCategory[0].bookNum += 1;
-        this.booklistDataService.updateCategory(parsedCategory[0]).subscribe((updatedCategory) => {
-          this.categories[index] = updatedCategory;
-          this.filteredCategories = this.categories.filter((c) => c.bookNum > 0);
-        });
-      } else{
-
-      }
-    });
+    this.booklistDataService.createBook(book);
   }
 
-  updateBook(book: Book) {
-    //this.booklistDataService.updateBookById(book.id, book);
-    this.booklistDataService.updateBook(book).subscribe(
-      (updatedBook) => book = updatedBook
-    );
+  updateBook(book: Book, id: string) {
+    this.booklistDataService.updateBook(book, id);
   }
 
-  deleteBook(book: Book) {
-    //this.booklistDataService.deleteBookById(id);
-    this.booklistDataService.removeBookByID(book.id).subscribe(
-      () => this.books = this.books.filter((filteredBook) => filteredBook.id !== book.id)
-    );
-    book.categories.forEach((stringCategory) => {
-      let parsedCategory: Category[] = this.categories.filter((filteredCategory) => stringCategory === filteredCategory.name);
-      let index: number = this.categories.indexOf(parsedCategory[0]);
-      parsedCategory[0].bookNum -= 1;
-      console.log(parsedCategory);
-      this.booklistDataService.updateCategory(parsedCategory[0]).subscribe((updatedCategory) => {
-        console.log({categories: this.categories, index, updated: updatedCategory});
-        this.categories[index] = updatedCategory;
-        this.filteredCategories = this.categories.filter((c) => c.bookNum > 0);
-      });
-    });
+  deleteBook(id: string) {
+    this.booklistDataService.deleteBook(id);
   }
 }

@@ -19,11 +19,12 @@ export class BooklistListItemComponent implements OnInit {
   readonly : Boolean;
 
   constructor() {
-    this.readonly = true;
-    this.readyToSend = false;
+
   }
 
   ngOnInit() {
+    this.readonly = true;
+    this.readyToSend = false;
   }
 
   toggleReadonly() {
@@ -38,4 +39,5 @@ export class BooklistListItemComponent implements OnInit {
   removeBook() {
     this.onBookDeleted.emit(this.book);
   }
+
 }

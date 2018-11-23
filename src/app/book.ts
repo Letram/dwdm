@@ -10,4 +10,5 @@ export class Book {
   constructor(values: Object = {}){
     Object.assign(this,values);
   }
+
 }
