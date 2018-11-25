@@ -22,10 +22,6 @@ export class BooklistHeaderComponent implements OnInit {
     $('.ui.checkbox').checkbox();
   }
 
-  printResults() {
-    console.log(this.newBook);
-  }
-
   emitBookEvent() {
     this.onBookdataCreated.emit(this.newBook);
     this.newBook = new Book();

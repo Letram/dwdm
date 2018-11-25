@@ -19,7 +19,7 @@
         </div>
         <div class="six wide required field">
           <label>Categories</label>
-          <select class="ui fluid dropdown headerDropdown" multiple="" [(ngModel)] = "newBook.categories" (change)="printResults()">
+          <select class="ui fluid dropdown headerDropdown" multiple="" [(ngModel)] = "newBook.categories">
             <option *ngFor="let category of categories" [ngValue]="category.name">{{category.name}}</option>
           </select>
         </div>

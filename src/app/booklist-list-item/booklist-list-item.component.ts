@@ -13,7 +13,7 @@ export class BooklistListItemComponent implements OnInit {
   @Input() book: Book;
 
   @Output() onBookUpdated: EventEmitter<Book> = new EventEmitter();
-  @Output() onBookDeleted: EventEmitter<Book> = new EventEmitter();
+  @Output() onBookDeleted: EventEmitter<string> = new EventEmitter();
 
   private readyToSend: Boolean;
   readonly : Boolean;
@@ -31,13 +31,12 @@ export class BooklistListItemComponent implements OnInit {
     this.readonly = !this.readonly;
     this.readyToSend = !this.readyToSend;
     if(!this.readyToSend){
-      console.log(this.book);
       this.onBookUpdated.emit(this.book);
     }
   }
 
   removeBook() {
-    this.onBookDeleted.emit(this.book);
+    this.onBookDeleted.emit(this.book.id);
   }
 
 }

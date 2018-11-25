@@ -11,7 +11,7 @@ export class BooklistListComponent implements OnInit {
 
   @Input() books: Book[];
   @Output() onBookUpdated: EventEmitter<Book> = new EventEmitter();
-  @Output() onBookDeleted: EventEmitter<Book> = new EventEmitter();
+  @Output() onBookDeleted: EventEmitter<string> = new EventEmitter();
 
   //TODO: use filter so it can filter our books using isFavourite, hasBeenRead or nothing.
   filter: string[] = ["All", "Favourite", "Read"];
@@ -26,7 +26,7 @@ export class BooklistListComponent implements OnInit {
     this.onBookUpdated.emit(book);
   }
 
-  onBookDeletedToApp(book: Book) {
-    this.onBookDeleted.emit(book);
+  onBookDeletedToApp(id: string) {
+    this.onBookDeleted.emit(id);
   }
 }
