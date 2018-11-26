@@ -1,0 +1,18 @@
+.customFav{
+  background-image: linear-gradient(to right, rgba(176,48,96,1), rgba(176,48,96,0));
+  color: #fff !important;
+}
+.customFav div, .customFav div input, .customBoth div, .customBoth div input{
+  color: #fff;
+}
+.customRead{
+  background-image: linear-gradient(to left, rgba(0,128,128,1), rgba(0,128,128,0));
+}
+.customBoth{
+  background-image: linear-gradient(to right, rgba(176,48,96,1), rgba(0,128,128,1));
+  color: #fff;
+}
+
+.rm-p-top{
+  padding-top: 0 !important;
+}

@@ -1,4 +1,4 @@
-  <div class="ui padded segment cm-top">
+  <div class="ui padded segment cm-top"  [class.customFav]="book.isFavourite && !book.hasBeenRead" [class.customRead]="!book.isFavourite && book.hasBeenRead" [class.customBoth]="book.isFavourite && book.hasBeenRead">
     <div class="ui header">
       <div class="ui right floated icon buttons">
         <button class="ui compact button" (click)="toggleReadonly()" [class.blue] = "!readonly">
