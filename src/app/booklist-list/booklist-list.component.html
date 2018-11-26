@@ -10,9 +10,9 @@
       <div class="right floated right aligned column">
         <div class="inline field">
           <label>
-            Filter
+            Order
           </label>
-          <select class="ui dropdown">
+          <select class="ui dropdown" id="filterSelect" (change)="filterBooks()">
             <option *ngFor="let filterValue of filter" [ngValue] = "filterValue">{{filterValue}}</option>
           </select>
         </div>

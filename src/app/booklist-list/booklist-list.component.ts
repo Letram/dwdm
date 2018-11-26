@@ -13,15 +13,42 @@ export class BooklistListComponent implements OnInit {
   @Output() onBookUpdated: EventEmitter<Book> = new EventEmitter();
   @Output() onBookDeleted: EventEmitter<string> = new EventEmitter();
 
-  //TODO: use filter so it can filter our books using isFavourite, hasBeenRead or nothing.
-  filter: string[] = ["All", "Favourite", "Read"];
+  filter: string[] = ["None", "Favourite", "Read"];
   constructor() { }
 
   ngOnInit() {
     $('.ui.dropdown').dropdown();
   }
 
-
+  filterBooks(){
+    let filter: string = $('#filterSelect').val();
+    switch (filter) {
+      case "Favourite":
+        this.books
+          .sort((book1, book2) => {
+            if(book1.isFavourite && !book2.isFavourite)return -1;
+            if(!book1.isFavourite && book2.isFavourite)return 1;
+            return 0;
+          });
+        break;
+      case "Read":
+        this.books
+          .sort((book1, book2) => {
+            if(book1.hasBeenRead && !book2.hasBeenRead)return -1;
+            if(!book1.hasBeenRead && book2.hasBeenRead)return 1;
+            return 0;
+          });
+        break;
+      case "None":
+        this.books
+          .sort((book1, book2) => {
+            if(book1.title > book2.title)return 1;
+            if(book1.title < book2.title)return -1;
+            return 0;
+        });
+        break;
+    }
+  }
   onBookUpdatedToApp(book:Book) {
     this.onBookUpdated.emit(book);
   }
