@@ -2,24 +2,34 @@
 
   <div class="ui grid">
     <div class="two column row">
-      <div class="left floated column">
+      <div class="column customCenter">
         <h3 class="ui header">
           Your books
         </h3>
       </div>
-      <div class="right floated right aligned column">
-        <div class="inline field">
-          <label>
-            Order
-          </label>
-          <select class="ui dropdown" id="filterSelect" (change)="filterBooks()">
-            <option *ngFor="let filterValue of filter" [ngValue] = "filterValue">{{filterValue}}</option>
-          </select>
+      <div class="column">
+        <div class="inline fields customDisplay">
+          <div class="field">
+            <label>
+              Title:
+            </label>
+            <div class="ui input mr-1">
+              <input type="text" [(ngModel)]="searchTitle" placeholder="Search your book by title here...">
+            </div>
+          </div>
+          <div class="field">
+            <label>
+              Order
+            </label>
+            <select class="ui dropdown" id="filterSelect" (change)="filterBooks()">
+              <option *ngFor="let filterValue of filter" [ngValue] = "filterValue">{{filterValue}}</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
     <div class="ui container fluid">
-        <app-booklist-list-item *ngFor="let book of books" (onBookUpdated)="onBookUpdatedToApp($event)" (onBookDeleted)="onBookDeletedToApp($event)" [book] = "book"></app-booklist-list-item>
+        <app-booklist-list-item *ngFor="let book of books | filter: searchTitle" (onBookUpdated)="onBookUpdatedToApp($event)" (onBookDeleted)="onBookDeletedToApp($event)" [book] = "book"></app-booklist-list-item>
     </div>
   </div>
 </div>

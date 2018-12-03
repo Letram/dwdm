@@ -14,6 +14,7 @@ import {BooklistApiService} from "./services/booklist-api.service";
 import {AngularFireModule} from "@angular/fire";
 import {AngularFirestoreModule} from "@angular/fire/firestore";
 import {environment} from "../environments/environment.firebase";
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {environment} from "../environments/environment.firebase";
     BooklistHeaderComponent,
     BooklistFooterComponent,
     BooklistListComponent,
-    BooklistListItemComponent
+    BooklistListItemComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

@@ -23,8 +23,15 @@ export class BooklistHeaderComponent implements OnInit {
   }
 
   emitBookEvent() {
+    if(!this.validForm())return alert("Form is not valid. Check it again.");
+    console.log(this.newBook);
     this.onBookdataCreated.emit(this.newBook);
     this.newBook = new Book();
     $('.headerDropdown').dropdown("restore defaults");
+  }
+
+  private validForm() {
+    if(!this.newBook.hasOwnProperty("title") || !this.newBook.hasOwnProperty("numOfPages"))return false;
+    return !(this.newBook.numOfPages === 0 || this.newBook.categories.length === 0 || (this.newBook.hasBeenRead && this.newBook.readDate !== null));
   }
 }

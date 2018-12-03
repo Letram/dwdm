@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
 import {Book} from "../book";
+import {FilterPipe} from "../filter.pipe";
 
 declare var $;
 @Component({
@@ -14,6 +15,7 @@ export class BooklistListComponent implements OnInit {
   @Output() onBookDeleted: EventEmitter<string> = new EventEmitter();
 
   filter: string[] = ["None", "Favourite", "Read"];
+  searchTitle: string = "";
   constructor() { }
 
   ngOnInit() {

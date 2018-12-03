@@ -1,0 +1,6 @@
+.customDisplay{
+  display: inline-flex;
+}
+.customCenter{
+  align-self: center;
+}

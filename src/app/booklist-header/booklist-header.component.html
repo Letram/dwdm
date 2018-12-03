@@ -15,17 +15,17 @@
       <div class="fields">
         <div class="eight wide required field">
           <label>Title</label>
-          <input name = "bookTitle" type="text" placeholder="Book title..." [(ngModel)] = "newBook.title">
+          <input name = "bookTitle" type="text" placeholder="Book title..." [(ngModel)] = "newBook.title" required>
         </div>
         <div class="six wide required field">
           <label>Categories</label>
-          <select class="ui fluid dropdown headerDropdown" multiple="" [(ngModel)] = "newBook.categories">
+          <select class="ui fluid dropdown headerDropdown" multiple="" [(ngModel)] = "newBook.categories" required>
             <option *ngFor="let category of categories" [ngValue]="category.name">{{category.name}}</option>
           </select>
         </div>
         <div class="two wide required field">
           <label>Number of pages:</label>
-          <input type="number" placeholder="Pages..." [(ngModel)] = "newBook.numOfPages">
+          <input type="number" placeholder="Pages..." [(ngModel)] = "newBook.numOfPages" required>
         </div>
       </div>
       <div class="two fields centered">
